@@ -6,8 +6,7 @@ export function HomeHeader() {
     return (
         <HStack
             bg="$gray600" 
-            pt="$16" pb="$5" px="$8" alignItems="center" 
-            style={{position: "absolute", top: 0, left: 0, right: 0}}
+            pt="$16" pb="$5" px="$8" alignItems="center"            
             gap="$4">
             <UserPhoto
                 source={{ uri: "https://github.com/TairineEllen.png"}}
