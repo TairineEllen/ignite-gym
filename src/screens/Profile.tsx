@@ -20,7 +20,7 @@ export function Profile() {
                             Alterar foto
                         </Text>
                     </TouchableOpacity>
-s
+
                     <Center w="$full" gap="$4">
                         <Input placeholder="Nome" bg="$gray600" />
                         <Input value="tairine@email.com" bg="$gray600" isReadOnly />
