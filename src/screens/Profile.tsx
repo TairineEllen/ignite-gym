@@ -2,15 +2,17 @@ import { Input } from "@components/Input";
 import { ScreenHeader } from "@components/ScreenHeader";
 import { UserPhoto } from "@components/UserPhoto";
 import { Center, Heading, Text, VStack } from "@gluestack-ui/themed";
-import { ScrollView, TouchableOpacity } from "react-native";
+import { Alert, ScrollView, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
+import * as FileSystem from "expo-file-system";
 
 export function Profile() {
     const [userPhoto, setUserPhoto] = useState("https:github.com/TairineEllen.png");
 
     async function handleUserPhotoSelect() {
-       const photoSelected =  await ImagePicker.launchImageLibraryAsync({
+       try {
+        const photoSelected =  await ImagePicker.launchImageLibraryAsync({
             mediaTypes: [
                 "images"
             ],
@@ -23,7 +25,22 @@ export function Profile() {
             return;
         }
 
-        setUserPhoto(photoSelected.assets[0].uri);
+        const photoUri = photoSelected.assets[0].uri;
+
+        if (photoUri) {
+            const photoInfo = (await FileSystem.getInfoAsync(photoUri)) as { size: number };
+            
+            if (photoInfo.size && (photoInfo.size / 1024 / 1024) > 5 ) {
+                return Alert.alert("Essa imagem é muito grande, escolha uma de até 5MB.")
+            }
+            
+
+            setUserPhoto(photoUri);
+
+        }
+       } catch (error) {
+        console.log(error)
+       }        
     }
 
     return (
