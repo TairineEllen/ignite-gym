@@ -1,13 +1,18 @@
 import { ComponentProps } from "react";
-import { Input as GSInput, InputField} from "@gluestack-ui/themed";
+import { FormControl, FormControlError, FormControlErrorText, Input as GSInput, InputField} from "@gluestack-ui/themed";
 
 type Props = ComponentProps<typeof InputField> & {
-    isReadOnly?: boolean
+    isReadOnly?: boolean;
+    errorMessage?: string | null;
+    isInvalid?: boolean;
 }
 
-export function Input({ isReadOnly = false, ...rest }: Props) {
+export function Input({ isReadOnly = false, errorMessage = null, isInvalid = false, ...rest }: Props) {
+    const invalid = !!errorMessage || isInvalid;
+
     return (
-        <GSInput            
+      <FormControl isInvalid={invalid} w= "$full" mb="$4">
+          <GSInput            
             h="$14"            
             borderWidth="$0"
             borderRadius="$md"
@@ -28,5 +33,13 @@ export function Input({ isReadOnly = false, ...rest }: Props) {
             />
         </GSInput>
 
+       <FormControlError>
+         <FormControlErrorText color="$red500">
+            {errorMessage}
+
+        </FormControlErrorText>
+       </FormControlError>
+
+      </FormControl>
     )
 }
