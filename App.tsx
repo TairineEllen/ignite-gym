@@ -8,7 +8,6 @@ import { Routes } from '@routes/index';
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_700Bold, Roboto_400Regular})
 
-  console.log(fontsLoaded)
   return (
    <GluestackUIProvider config={config}>
       <StatusBar barStyle="light-content" backgroundColor="transparent" translucent/>
