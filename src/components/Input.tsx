@@ -18,10 +18,16 @@ export function Input({ isReadOnly = false, errorMessage = null, isInvalid = fal
             borderRadius="$md"
             $focus={{
                 borderWidth: 1,
-                borderColor: "$green500"
+                borderColor: invalid ? "$red500" : "$green500"
             }}
             isReadOnly={isReadOnly}
             opacity={isReadOnly ? 0.5 : 1}
+            isInvalid={isInvalid}
+            $invalid={{
+                 borderWidth: 1,
+                borderColor: "$red500"
+            }}
+
         >
             <InputField 
                 color="$white"
