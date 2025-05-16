@@ -35,8 +35,17 @@ export function SignUp() {
         navigation.goBack();
     }
 
-    function handleSignUp(data: FormDataProps) {
-        console.log(data);       
+    async function handleSignUp({ name, email, password }: FormDataProps) {
+       const response = await fetch("http://127.0.0.1:3333/users", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await response.json();
     }
 
     return (
