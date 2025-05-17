@@ -32,10 +32,13 @@ export function SignIn() {
 
     async function handleSignIn({ email, password}: FormData) {
         try {
+            setIsLoading(true);
             await signIn(email, password);
         } catch (error) {
             const isAppError = error instanceof AppError;
             const title = isAppError ? error.message : "Não foi possível acessar, tente novamente mais tarde.";
+
+            setIsLoading(false);
 
              toast.show({
                 placement: "top",
@@ -47,7 +50,7 @@ export function SignIn() {
                         onClose={() => toast.close(id)}
                     />
                 )
-            })
+            })            
         }   
     }
 
